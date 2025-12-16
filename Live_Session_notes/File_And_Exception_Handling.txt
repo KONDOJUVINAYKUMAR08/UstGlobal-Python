@@ -1,0 +1,460 @@
+text files
+
+1. creating text file
+2. reading  text file
+3. appending text file
+4. lab file manipulation
+
+f=open('data.txt') # by default the file is open in read mode 
+print("Name Marks")
+print("----------")
+for i in f:
+    name,marks=i.split()
+    print(name,marks)
+    
+f.close()    
+    
+==============================================
+
+# read the file , print name, marks and result.
+# resul is pass if marks>=50 , otherwise fail 
+f=open("data.txt")
+for i in f:
+    name,mark=i.split()
+    if int(mark)>=50:
+       result='Pass'
+    else:
+       result='Fail'
+    print(name,mark, result)
+f.close()     
+
+==================================================
+
+1.read name , m1 and m2 [ m1 and m2 are marks of two subjects ] of 3 students
+ from console and write into data.txt
+
+2.read name , m1 and m2 from data.txt , find total =m1+m2 and write output in the following format
+  given below
+
+  name  m1  m2 total
+  ****  50  60 110
+  ****  60  60 120
+
+  name
+
+================================================================================
+
+# appending a file
+
+when the file is open in w mode  and if the file has records , they are removed 
+to avoid this one , we use append mode 'a'
+
+
+f=open('data.txt', 'a') 
+for i in range(2):
+    name=input("Enter name  ")
+    mark=input("Enter marks ")
+    f.write(name+" "+mark)
+    f.write("\n")
+f.close()    
+==================================================================================
+
+# read() method entire file 
+# readline() reads one line 
+# read(5)  reads 5 bytes
+f=open("data.txt")
+print(f.read())
+f.close()
+================================================================================
+# read() method entire file 
+# readline() reads one line 
+# read(5)  reads 5 bytes
+# strip() method removes leaing and trailing blanks
+f=open("data.txt")
+print(f.readline().strip())
+print(f.readline().strip())
+f.close()
+============================================================================
+# read() method entire file 
+# readline() reads one line 
+# read(5)  reads 5 bytes
+# strip() method removes leaing and trailing blanks
+f=open("data.txt")
+print(f.read(1)) 
+f.close()
+=============================================================================
+
+Exceptional Handling:
+
+Error handling:
+
+Every program has some bugs. No one claim that their programs work perfect always for ever.
+
+Errors not revealed.
+
+IBM machine has been working since late 1950s for commercial purpose.
+
+it went fine till late 1990s. Date dd-mm-yy :
+
+
+windows xp -fine
+windows vista- complete failure
+windows 7
+
+Errors may come from 
+
+
+1. Hardware failure
+
+2. Human Error
+
+3. Software failue .
+
+ if program has error , it is terminated abnormally and we see ugly screen.
+
+ as a developer  , we dont terminate our program abnormally and must exit from the system  ,by showing
+ 
+ proper error message.
+
+
+try :
+
+    code 
+
+except :
+
+  to trap error and display proper message.
+
+
+Error :
+
+1. Built in Error - more than 10,0000
+
+2. Custom Error - class and objects
+
+
+try:
+  #x=5    
+  print(x)
+except  NameError:
+  print("x is not defined ")
+else:
+  print("No bugs and successful execution")
+finally:  
+    print("Program Ends ")
+  
+# except block is executed when there is a error in the try block 
+# except block is not executed when there is no error in the try block.
+# we can hav any number of except blocks
+# else : this block of code is executed when there is no error in the try block
+# final block is executed irrespective error or not in the try block.
+# try except  else and final -this is the order.
+# we can hav one else and finally block , but any number of except blocks
+
+Here are 10 different examples of try/except (try-catch) usage in Python:
+
+1. Basic Exception Handling
+
+try:
+    num = int("abc")
+except ValueError:
+    print("Invalid number!")
+==================================================================================
+2. Multiple Exceptions
+
+try:
+    result = 10 / 0
+
+except ZeroDivisionError:
+    print("Division by zero not allowed.")
+except ValueError:
+    print("Value error occurred.")
+
+=================================================================================
+
+3. Catching Multiple Exceptions in One Block
+try:
+    value = int("xyz")
+except (ValueError, TypeError):
+    print("Either value or type error.")
+
+4. Using else with try-except
+try:
+    num = int("123")
+except ValueError:
+    print("Conversion failed.")
+else:
+    print("Conversion successful:", num)
+
+5. Using finally
+try:
+    f = open("test.txt", "r")
+    data = f.read()
+except FileNotFoundError:
+    print("File not found.")
+finally:
+    print("Execution completed.")
+
+6. Handling Dictionary KeyError
+try:
+    my_dict = {"a": 1}
+    print(my_dict["b"])
+except KeyError:
+    print("Key does not exist.")
+
+7. Handling IndexError
+try:
+    lst = [1, 2, 3]
+    print(lst[5])
+except IndexError:
+    print("Index out of range.")
+
+8. Handling File Errors
+try:
+    with open("nonexistent.txt", "r") as f:
+        data = f.read()
+except FileNotFoundError:
+    print("File not found error handled.")
+
+9. Custom Exception Handling
+class NegativeNumberError(Exception):
+    pass
+
+try:
+    num = -5
+    if num < 0:
+        raise NegativeNumberError("Negative numbers not allowed")
+except NegativeNumberError as e:
+    print("Custom Exception:", e)
+
+10. Generic Exception Handling
+try:
+    x = 10 / 0
+except Exception as e:
+    print("An error occurred:", e)
+
+===============================================================================================================
+map function
+
+syntax:map(fn, iterable)
+
+this map apply fn to each iteralble and returns  object
+
+it returns same no elements but items may be changed.
+
+iterable: list, tuple 
+
+fn : built-in , UDF , lambda function
+
+5 people going for gym , weight are recorded
+
+fn - 3 hour work out for 12 weeks
+
+their weight reduced
+
+marks=[26,28,42,,16,18]
+
+i want add 2 marks to each item and put in new list say newmarks
+
+marks =[26,28,42,16,18]
+newmarks=[]
+for i marks:
+    x=i+2
+    newmarks.append(x)
+
+print(marks)
+print(list(newmarks)
+
+======================================================================
+
+syntax: lambda parameter list : expression
+        
+        no return 
+
+map(fn,iterable) - map applies fn to each iterable and returns object
+
+fn - built in function ,udf, lambda 
+         
+marks =[26,28,42,16,18]
+nmarks=map(lambda x:x+2, marks)
+print(list(nmarks))
+
+
+marks =[26,28,42,16,18]
+nmarks=[x+2 for x in marks] 
+print(nmarks)
+=============================================================
+cel=[24,26,28,30]
+
+create new list fah contains fah equivalent of items in celciuls
+
+1. map
+
+cel=[24,26,28,30]
+fah=map(lambda x: x*1.6+32 , cel)
+print(list(map))
+
+2. list comprehension
+
+cel=[24,26,28,30]
+fah=[x*1.6+32 for x in cel]
+print(cel)
+print(fah)
+
+====================================================================
+filter:
+
+syntax: 
+
+filter(fn , iterabale) 
+
+filter applies fn to each element of the iterable and return the item for which is cond is true 
+
+marks=[35,45,56,78,90,12]
+plist=filter(lambda x: x>=50 , marks)
+print(plist)
+=====================================================================
+
+fruits=['apple' , 'cherry' , 'guava' , 'lemon', 'banana' , 'orange']
+
+xfruits that conaints fruits whose lenth is 5 
+
+
+fruits=['apple' , 'cherry' , 'guava' , 'lemon', 'banana' , 'orange']
+xfruits=filter(lambda x:len(x)==5 , fruits)
+print(list(xfruits))
+
+==================================================================
+
+import random
+for i in range(5):
+    print(random.randint(2, 999))
+
+
+============================================================================
+
+random() returns random nos from 0 to 1
+
+
+import random
+for i in range(4):
+    print(random.random())
+
+===============================================================================
+
+import random
+for i in range(4):
+  print(int( (random.random()) * 10000))
+
+================================================================================
+
+The choice() method returns a randomly selected element from the specified sequence.
+
+The sequence can be a string, a range, a list, a tuple or any other kind of sequence.
+
+import random
+
+mylist = ["apple", "banana", "cherry"]
+
+print(random.choice(mylist))
+
+======================================================================================
+import random
+mylist = ["apple", "banana", "cherry" ,"lemon", "guava"]
+print(random.choices(mylist , k=3))
+=====================================================================================
+
+Use random.random() to generate OTP nos of length 6 
+
+=================================================================================
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=========================================================================
+
+     
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

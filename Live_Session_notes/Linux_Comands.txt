@@ -1,0 +1,312 @@
+1. ls :to list files and directories- same as dir in windows
+2. ls -l [l for long information]
+3. we have editor 
+4. nano filename
+	example:
+		nano ust-global-1
+	to write anything and save ctrl o
+	to exit the file ctrl x
+5. cat filename
+	example:
+		cat ust-global-1
+	to get contents from the file
+6. ls -l ust*
+7. mkdir ust-glob
+
+
+  d --> is a directory
+  - --> is a file
+  
+	rwx	r-x   	r-x
+        owner	group	others
+   r -read permission -4
+   w -write permission -2
+   x -execute permission -1
+
+8.unix scripting files has extension .sh
+	nano ustglob-1.sh
+		echo "Welcome to Linux Scripting "
+		echo "Welcome to 5th session     "
+		ctrl o - to save 
+		ctrl x - to exit
+	ls -l ustglob-1.sh
+	-rw-r--r-- 1
+	./ustglob-1.sh
+	chmod 744 ustglob-1.sh
+	./ustglob-1.sh
+
+
+	. --> refers to current directory
+	/ --> is to execute the file
+
+
+
+9. nano ust-glob-2.sh
+	echo "Enter your name  "
+	read name
+	echo "My name is $name. "
+	ctrl o and enter
+	ctrl x
+	
+
+	ls -l ust-gloab-2.sh
+	chmod 744 ust-glob-2.sh
+	./ust-glob-2.sh
+	then
+	Enter your name  
+	Vinay
+	My name is Vinay.  
+
+	cat ust-gloab-2.sh
+	we can then see contents of the file
+
+
+
+10. nan0 ust-glob-3.sh
+	echo "Enter your name: "
+	read name
+	echo "Enter your age: "
+	read age
+	echo "My name is: $name"
+	echo "My Age is: $age"
+
+	cat ust-gloab-3.sh
+	
+
+
+11. Instead of writing echo and read we can do as following:
+	read -p "Enter first number: "a
+	read -p "Enter second number: "b
+	sum=$((a + b))
+	echo "Sum = $sum"
+	
+     Example:
+
+	muru@murugadoss:~$ nano ust-glob-4.sh
+	muru@murugadoss:~$  chmod 744  ust-glob-4.sh
+	muru@murugadoss:~$ ./ust-glob-4.sh
+	Enter first number: 34
+	Enter second number: 45
+	Sum = 79
+	muru@murugadoss:~$ cat ust-glob-4.sh
+	read -p "Enter first number: " a
+	read -p "Enter second number: " b
+	sum=$((a + b))
+	echo "Sum = $sum"
+	muru@murugadoss:~$
+	
+
+
+12. nano ust-glob-5.sh
+
+    read -p "Enter two numbers: " a  b
+    if [ "$a" -gt "$b" ]; then
+    	echo "$a is bigger"
+    else
+    	echo "$b is bigger"
+    fi
+
+
+	chmod +x ust-glob-5.sh
+	./ust-gloab-5.sh
+	
+
+
+	muru@murugadoss:~$ nano ust-glob-5.sh
+	muru@murugadoss:~$ chmod +x ust-glob-5.sh
+	muru@murugadoss:~$ ls -l  ust-glob-5.sh
+	-rwxr-xr-x 1 muru muru 119 Dec 14 12:02 ust-glob-5.sh
+	muru@murugadoss:~$ ./ust-glob-5.sh
+	Enter two numbers: 45 55
+	55 is bigger
+	muru@murugadoss:~$ cat ust-glob-5.sh
+	read -p "Enter two numbers: " a  b
+	if [ "$a" -gt "$b" ]; then
+    		echo "$a is bigger"
+	else
+    		echo "$b is bigger"
+	fi
+ 
+
+13.   read width and breadth of a rectangle.
+      print area=w*b
+      circum=2*(w+b)
+
+
+	nano ust-gloab-6.sh
+	read -p "Enter width and breadth of rectangle: "w b
+	area = $((w * b)
+	circum = $((2 * (w + b)))
+	echo "Area of rectangle is: $area"
+	echo "Circumference of rectangle is: $circum"
+
+ 
+
+	chmod +x ust-gloab-6.sh
+	./ust-gloab-6.sh
+	
+
+
+
+
+muru@murugadoss:~$ cat ust-glob-6.sh
+read -p "Enter width and breadth: " w b
+area=$((w * b))
+circumference=$((2 * (w + b)))
+echo "Area = $area"
+echo "Circumference = $circumference"
+
+ 
+muru@murugadoss:~$ chmod +x ust-glob-6.sh
+muru@murugadoss:~$ ./ust-glob-6.sh
+Enter width and breadth: 3 5
+Area = 15
+Circumference = 16
+muru@murugadoss:~$
+
+
+14. read three numbers a, b and c
+    print total and its average
+
+
+	nano ust-gloab-7.sh
+	read -p "Enter three Numbers: "a b c
+	sum=$((a + b + c))
+	avg=$((sum / 3))
+	echo "Total is: $sum"
+	echo "Average is: $avg"
+
+  	chmod +x ust-gloab-7.sh
+	./ust-gloab-7.sh
+
+
+
+muru@murugadoss:~$  nano ust-glob-7.sh
+muru@murugadoss:~$ nano  ust-glob-7.sh
+muru@murugadoss:~$ chmod +x ust-glob-7.sh
+muru@murugadoss:~$ cat ust-glob-7.sh
+read -p "Enter three numbers: " a b c
+sum=$((a + b + c))
+avg=$((sum / 3))
+echo "Sum = $sum"
+echo "Average = $avg"
+ 
+muru@murugadoss:~$ ./ust-glob-7.sh
+Enter three numbers: 3 4 5
+Sum = 12
+Average = 4
+muru@murugadoss:~$
+
+
+
+
+15.  Print numbers from 1 to 10
+
+
+
+	nano ust-gloab-8.sh
+	i=1
+	while [ $i -le 10]
+	do
+ 		echo $i
+	  	i=$((i + 1))
+	done
+
+
+muru@murugadoss:~$ cat ust-glob-8.sh
+i=1
+while [ $i -le 10 ]
+do
+    echo $i
+    i=$((i + 1))
+done
+muru@murugadoss:~$ chmod +x ust-glob-8.sh
+muru@murugadoss:~$ ./ust-glob-8.sh
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+muru@murugadoss:~$
+ 
+
+
+
+
+16.  Print even numbers from 1 to 20
+
+	nano ust-gloab-9.sh
+	i = 2
+	while [$i -le 20]
+	do
+		echo $i
+		i=$((i + 2))
+	done
+
+
+
+
+muru@murugadoss:~$ chmod +x ust-glob-9.sh
+muru@murugadoss:~$ ./ust-glob-9.sh
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+muru@murugadoss:~$
+
+
+
+
+17. Sum of N Numbers n=10, sum=55  
+
+
+	nano ust-gloab-10.sh
+
+	read -p "Enter n: "n	
+	i=1
+	sum = 0
+	while [$i -le $n]
+	do
+		sum=$((sum + i))
+		i=$((i + 1))
+	done
+	echo "Sum = $sum"
+
+
+
+
+muru@murugadoss:~$ chmod +x ust-glob-10.sh
+muru@murugadoss:~$ ./ust-glob-10.sh
+Enter n: 10
+Sum = 55
+muru@murugadoss:~$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
