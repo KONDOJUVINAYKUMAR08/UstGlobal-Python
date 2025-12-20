@@ -1,0 +1,93 @@
+
+Assigment-2
+Date of submission :25th Dec 2025
+
+All coding must be pushed into your  github folder
+==================================================
+
+List
+====
+How do you add an element at the end of a list in Python?
+
+How can you remove an element from a list by its index?
+
+What will be the output of the following code snippet?
+
+lst = [1, 2, 3, 4, 5]
+lst[1:3] = [10, 20]
+print(lst)
+
+
+How can you check if an element exists in a list in Python?
+
+Write a Python function that removes duplicates from a list without using the set() function.
+
+Tuple
+======
+Can you modify the elements of a tuple after it has been created? Why or why not?
+
+How would you access the second-to-last element in a tuple?
+
+What is the difference between a list and a tuple in Python?
+
+Given the tuple t = (1, 2, 3, 4), how can you change the value 3 to 100?
+
+Write a Python function that takes a tuple of numbers and returns the sum of all its elements.
+
+Set
+===
+How do you remove all elements from a set in Python?
+
+What is the output of the following code snippet?
+
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+print(a - b)
+
+
+How do you check if an element is present in a set?
+
+Write a Python program to find the intersection of two sets.
+
+How does a set handle duplicate values when adding them?
+
+Dictionary
+==========
+How can you add a new key-value pair to an existing dictionary in Python?
+
+What happens if you try to access a key that does not exist in a dictionary?
+
+Write a Python function that takes a dictionary and returns a list of keys that have values greater than 50.
+
+How would you iterate over both keys and values of a dictionary in Python?
+
+Write a Python function that merges two dictionaries.
+
+Map and Reduce
+================
+How does the map() function work in Python? Give an example where you square each number in a list.
+
+What is the output of the following code?
+
+from functools import reduce
+result = reduce(lambda x, y: x * y, [1, 2, 3, 4])
+print(result)
+
+
+How would you use the map() function to convert all string elements of a list to uppercase?
+
+Write a Python program that uses reduce() to find the greatest common divisor (GCD) of a list of numbers.
+
+Compare and contrast the map() and filter() functions in Python.
+
+List Comprehension
+==================
+Write a list comprehension that returns all even numbers from 0 to 20.
+
+How would you create a new list of squares from an existing list of numbers using list comprehension?
+
+Write a list comprehension to extract all words that are longer than 4 characters from a sentence.
+
+How can you use list comprehension to generate a list of the first 10 Fibonacci numbers?
+
+Can you use an if condition inside a list comprehension? Provide an example where only odd numbers are selected from a list.
