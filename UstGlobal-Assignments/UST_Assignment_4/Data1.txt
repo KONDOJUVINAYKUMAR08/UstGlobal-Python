@@ -1,0 +1,3 @@
+Vinay having roll number 101 has enrolled in Java course.
+Vignesh having roll number 102 has enrolled in python course.
+Bharath having roll number 103 has enrolled in .net course.

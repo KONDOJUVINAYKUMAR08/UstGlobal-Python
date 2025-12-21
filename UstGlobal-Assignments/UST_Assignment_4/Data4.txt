@@ -1,0 +1,4 @@
+Contents of Data3.txt are:
+Naruto is the 7th Hokage.
+Kakhashi is the 6th Hokage.
+Kakhashi is sensi of Naruto.
