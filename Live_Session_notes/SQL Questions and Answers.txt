@@ -1,0 +1,357 @@
+SQL Questions
+=============
+
+create table tdept(deptno int primary key , dname varchar(10) not null );
+insert into tdept values(10,'IT');
+insert into tdept values(20,'HR');
+insert into tdept values(30,'Admin');
+insert into tdept values(40,'RND');
+
+create table temp(id int primary key , name varchar(10) , deptno int);
+insert into  temp values(100,'A',10);
+insert into  temp values(101,'B',20);
+insert into  temp values(102,'C',30);
+insert into  temp (id,name) values(103,'D');
+
+Write a query to display employee names and their department names using an INNER JOIN.
+
+SQL> select e.id , e.name , d.dname from temp e inner join  tdept d on d.deptno = e.deptno;
+
+        ID NAME       DNAME
+---------- ---------- ----------
+       100 A          IT
+       101 B          HR
+       102 C          Admin
+
+========================================================================================================================================
+Write a query to list all employees and their department names, including employees who are not assigned to any department (LEFT JOIN).
+
+SQL> select e.id , e.name , d.dname from temp e left  join  tdept d on d.deptno = e.deptno;
+
+        ID NAME       DNAME
+---------- ---------- ----------
+       100 A          IT
+       101 B          HR
+       102 C          Admin
+       103 D
+
+==========================================================================================================================================
+
+Write a query to find departments that have no employees using a LEFT JOIN.
+
+
+SQL> select d.deptno  , d.dname from  tdept d where d.deptno NOT IN ( select deptno from emp ) ;
+
+    DEPTNO DNAME
+---------- ----------
+        40 RND
+ 
+=============================================================================================================================
+
+Display customer names and order details by joining the Customers and Orders tables.
+
+Write a query to find employees who work in the same department as employee 'JAMES'.
+
+
+SQL> select e.empno, e.ename , e.deptno  from emp e where e.deptno=(select deptno from emp where ename='JAMES');
+
+     EMPNO ENAME          DEPTNO
+---------- ---------- ----------
+      7698 BLAKE              30
+      7499 ALLEN              30
+      7521 WARD               30
+      7654 MARTIN             30
+      7844 TURNER             30
+      7900 JAMES              30
+
+6 rows selected.
+
+=============================================================================================================================
+
+SQL> 
+
+GROUP BY Questions
+
+Write a query to find the total salary paid per department.
+
+
+SQL> select deptno , sum(sal) from emp group by deptno;
+
+    DEPTNO   SUM(SAL)
+---------- ----------
+        30       9400
+        10       8750
+        20      10875
+
+SQL> select deptno , sum(sal) As "Tot Sal"  from emp group by deptno;
+
+    DEPTNO    Tot Sal
+---------- ----------
+        30       9400
+        10       8750
+        20      10875
+
+SQL> select deptno , sum(sal) As "Tot Sal"  from emp group by deptno order by deptno;
+
+    DEPTNO    Tot Sal
+---------- ----------
+        10       8750
+        20      10875
+        30       9400
+
+SQL>
+
+
+Write a query to count the number of employees in each department.
+
+select deptno , count(*) as "TotEmp" from emp group by deptno order by deptno;
+
+
+SQL> select deptno , count(*) as "TotEmp" from emp group by deptno order by deptno;
+
+    DEPTNO     TotEmp
+---------- ----------
+        10          3
+        20          5
+        30          6
+
+Write a query to find the average salary of employees in each job role.
+
+select job , avg(sal) as "Average Salary" from emp group by job;
+
+
+SQL> select job, avg(sal) from emp group by job ;
+
+JOB         AVG(SAL)
+--------- ----------
+ANALYST         3000
+CLERK         1037.5
+SALESMAN        1400
+MANAGER   2758.33333
+PRESIDENT       5000
+
+SQL> select job, round(avg(sal),0) as "Average Salary"  from emp group by job ;
+
+JOB       Average Salary
+--------- --------------
+ANALYST             3000
+CLERK               1038
+SALESMAN            1400
+MANAGER             2758
+PRESIDENT           5000
+
+SQL>
+
+
+Write a query to display departments having more than 5 employees.
+
+
+SQL> select deptno , count(*) as "TotEmp" from emp  group by deptno  having count(*) >=5;
+
+    DEPTNO     TotEmp
+---------- ----------
+        30          6
+        20          5
+
+SQL>
+
+
+Write a query to find the maximum and minimum salary in each department.
+
+
+SQL> select deptno , max(sal) , min(sal) from emp group by deptno ;
+
+    DEPTNO   MAX(SAL)   MIN(SAL)
+---------- ---------- ----------
+        30       2850        950
+        10       5000       1300
+        20       3000        800
+
+SQL>
+
+
+ORDER BY Questions
+
+Write a query to display all employees ordered by salary in descending order.
+
+
+SQL> select * from emp order by sal desc;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+
+14 rows selected.
+
+SQL>
+
+Write a query to list students ordered by marks (highest to lowest) and then by name (A–Z).
+
+
+
+
+
+Write a query to display products ordered by category and price within each category.
+
+Write a query to show the latest 5 orders based on order date.
+
+Write a query to display employees ordered by department and salary descending.
+
+RANK and DENSE_RANK Questions
+
+Write a query to assign a RANK to employees based on salary (highest salary gets rank 1).
+
+SQL> select empno, ename, sal , rank() over( order by sal desc) as rnk  from emp  ;
+
+     EMPNO ENAME             SAL        RNK
+---------- ---------- ---------- ----------
+      7839 KING             5000          1
+      7788 SCOTT            3000          2
+      7902 FORD             3000          2
+      7566 JONES            2975          4
+      7698 BLAKE            2850          5
+      7782 CLARK            2450          6
+      7499 ALLEN            1600          7
+      7844 TURNER           1500          8
+      7934 MILLER           1300          9
+      7654 MARTIN           1250         10
+      7521 WARD             1250         10
+
+     EMPNO ENAME             SAL        RNK
+---------- ---------- ---------- ----------
+      7876 ADAMS            1100         12
+      7900 JAMES             950         13
+      7369 SMITH             800         14
+
+14 rows selected.
+
+SQL>
+
+
+Write a query to assign a DENSE_RANK to employees within each department based on salary.
+
+SQL> select empno, ename, sal ,deptno , dense_rank() over( partition by  deptno order by sal desc) as rnk  from emp  ;
+
+     EMPNO ENAME             SAL     DEPTNO        RNK
+---------- ---------- ---------- ---------- ----------
+      7839 KING             5000         10          1
+      7782 CLARK            2450         10          2
+      7934 MILLER           1300         10          3
+      7788 SCOTT            3000         20          1
+      7902 FORD             3000         20          1
+      7566 JONES            2975         20          2
+      7876 ADAMS            1100         20          3
+      7369 SMITH             800         20          4
+      7698 BLAKE            2850         30          1
+      7499 ALLEN            1600         30          2
+      7844 TURNER           1500         30          3
+
+     EMPNO ENAME             SAL     DEPTNO        RNK
+---------- ---------- ---------- ---------- ----------
+      7521 WARD             1250         30          4
+      7654 MARTIN           1250         30          4
+      7900 JAMES             950         30          5
+
+14 rows selected.
+
+SQL>
+
+
+Write a query to find the second highest salary using the RANK function.
+
+without rank
+
+SQL> select max(sal) from emp where sal < (select max(sal) from emp ) ;
+
+  MAX(SAL)
+----------
+      3000
+
+SQL>
+
+with Rank:
+
+
+SELECT deptno, sal AS second_salary
+FROM (
+    SELECT deptno,
+           sal,
+           RANK() OVER (PARTITION BY deptno ORDER BY sal DESC) AS rnk
+    FROM emp
+) 
+WHERE rnk = 2;
+
+=====================================================================================================
+
+Write a query to display the top 3 highest-paid employees in each department using DENSE_RANK.
+
+
+
+SQL> SELECT deptno, sal
+  2  FROM (
+  3      SELECT deptno,
+  4             sal,
+  5             Dense_RANK() OVER (PARTITION BY deptno ORDER BY sal DESC) AS rnk
+  6      FROM emp
+  7  )
+  8  WHERE rnk <=3;
+
+    DEPTNO        SAL
+---------- ----------
+        10       5000
+        10       2450
+        10       1300
+        20       3000
+        20       3000
+        20       2975
+        20       1100
+        30       2850
+        30       1600
+        30       1500
+
+10 rows selected.
+
+SQL>
+
+
+
+
+========================================================================================================
+
+Write a query to compare the difference between RANK and DENSE_RANK on employee salaries.
+
+if two rows have ties , next rank is skipped in the case of  rank() but not in the case of
+
+dense_rank()
+================================================================================================= 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
