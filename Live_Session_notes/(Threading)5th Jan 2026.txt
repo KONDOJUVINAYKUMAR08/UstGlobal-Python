@@ -1,0 +1,474 @@
+Date   : 5th Jan 2026:
+
+
+What is a Thread in Python?
+===========================
+
+A thread in Python is a small unit of execution that runs within a process.
+
+Threads allow a program to do multiple tasks at the same time (concurrently).
+
+A thread is a way to run parts of a program simultaneously inside the same process.
+
+Why Use Threads?
+================
+
+Threads are mainly used when a program needs to:
+
+Perform multiple tasks at once
+
+Handle I/O operations (file reading, network requests, waiting)
+
+Keep applications responsive (like GUI apps)
+
+Key Characteristics of Threads:
+===============================
+
+Threads share the same memory
+
+They are lightweight and fast to create
+
+All threads belong to one process
+
+In Python, threads are affected by the Global Interpreter Lock (GIL)
+
+============================================================================================================================
+Real-Life Example:
+=================:
+
+Think of a restaurant kitchen:
+
+The process is the kitchen
+
+Threads are cooks
+
+All cooks share the same kitchen tools and ingredients
+
+Each cook works on a different task at the same time
+
+
+import threading
+
+def task():
+    print("This is a thread")
+
+t = threading.Thread(target=task)
+t.start()
+t.join()
+
+
+When to Use Threads in Python
+
+✅ Best for:
+
+Downloading files
+
+Reading/writing files
+
+Network communication
+
+Waiting tasks (I/O-bound)
+
+❌ Not ideal for:
+
+Heavy mathematical calculations (use processes instead)
+
+============================================================================================================================
+
+Thread Life Cycle in Python:
+
+The thread life cycle describes the states a thread goes through from creation to termination.
+
+| State      | Description           |
+| ---------- | --------------------- |
+| New        | Thread object created |
+| Runnable   | Ready to run          |
+| Running    | Executing code        |
+| Blocked    | Waiting for resource  |
+| Terminated | Execution completed   |
+
+==================================================================================================================================
+
+import threading
+import time
+
+def task():
+    print("Thread started")
+    time.sleep(2)
+    print("Thread finished")
+
+t = threading.Thread(target=task)
+print("Thread created")      # New
+t.start()                    # Runnable → Running
+t.join()                     # Terminated
+print("Main program ends")
+
+==================================================================================================================================
+
+Creating Two Threads in Python:
+
+import threading
+
+def task1():
+    for i in range(3):
+        print("Thread 1 is running")
+
+def task2():
+    for i in range(3):
+        print("Thread 2 is running")
+
+# Create two threads
+t1 = threading.Thread(target=task1)
+t2 = threading.Thread(target=task2)
+
+# Start the threads
+t1.start()
+t2.start()
+
+# Wait for both threads to finish
+t1.join()
+t2.join()
+
+print("Main program finished")
+==================================================================
+import threading – imports the threading module
+
+task1() and task2() – functions executed by threads
+
+Thread(target=...) – creates thread objects
+
+start() – starts thread execution
+
+join() – waits for threads to complete
+===============================================================================================================================
+
+Two Threads with Arguments (Python Code)
+
+
+import threading
+
+def print_message(name, count):
+    for i in range(count):
+        print(f"Hello {name}")
+
+# Create two threads with arguments
+t1 = threading.Thread(target=print_message, args=("Alice", 3))
+t2 = threading.Thread(target=print_message, args=("Bob", 2))
+
+# Start the threads
+t1.start()
+t2.start()
+
+# Wait for both threads to finish
+t1.join()
+t2.join()
+
+print("Main program finished")
+
+================================================================================================================================
+
+
+Explanation
+
+print_message(name, count) → function with arguments
+
+args=("Alice", 3) → arguments passed to thread
+
+t1 and t2 → two separate threads
+
+start() → begins execution
+
+join() → waits for completion
+
+================================================================================================================================
+
+Two Threads with sleep() (Python Code)
+
+
+import threading
+import time
+
+def task1():
+    for i in range(3):
+        print("Thread 1 running")
+        time.sleep(1)   # pause for 1 second
+
+def task2():
+    for i in range(3):
+        print("Thread 2 running")
+        time.sleep(2)   # pause for 2 seconds
+
+# Create two threads
+t1 = threading.Thread(target=task1)
+t2 = threading.Thread(target=task2)
+
+# Start threads
+t1.start()
+t2.start()
+
+# Wait for both threads to complete
+t1.join()
+t2.join()
+
+print("Main program finished")
+
+Explanation
+==============
+time.sleep(seconds) pauses the current thread
+
+Thread 1 sleeps for 1 second
+
+Thread 2 sleeps for 2 seconds
+
+Threads run concurrently, not sequentially
+===================================================================================================================
+
+
+Thread Synchronization in Python
+
+Thread synchronization is the technique used to control access to shared resources so that multiple threads 
+
+do not interfere with each other. Without synchronization, threads can cause race conditions and produce incorrect results.
+
+import threading
+
+count = 0
+
+def increment():
+    global count
+    for _ in range(100000):
+        count += 1
+
+t1 = threading.Thread(target=increment)
+t2 = threading.Thread(target=increment)
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+print("Final count:", count)
+
+===================================================================================================
+Example WITH Synchronization (Using Lock):
+==========================================
+
+
+import threading
+
+count = 0
+lock = threading.Lock()
+
+def increment():
+    global count
+    for _ in range(100000):
+        lock.acquire()      # lock the resource
+        count += 1
+        lock.release()      # release the resource
+
+t1 = threading.Thread(target=increment)
+t2 = threading.Thread(target=increment)
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+print("Final count:", count)
+
+======================================================================================================
+
+Using Lock with with Statement (Recommended)
+
+
+import threading
+
+count = 0
+lock = threading.Lock()
+
+def increment():
+    global count
+    for _ in range(100000):
+        with lock:
+            count += 1
+
+t1 = threading.Thread(target=increment)
+t2 = threading.Thread(target=increment)
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+print("Final count:", count)
+================================================================================================================
+
+what is process:
+
+What is a Process in Python?
+
+A process in Python is an independent program in execution with its own memory space.
+
+Processes allow a program to run tasks in parallel using multiple CPU cores.
+
+Simple Definition
+
+A process is a separate execution unit that runs independently with its own memory.
+
+
+Why Use Processes?
+
+Use processes when:
+
+Tasks are CPU-bound (heavy calculations)
+
+You want true parallelism
+
+You need isolation between tasks
+
+
+Key Features of Processes
+
+Each process has separate memory
+
+No shared data by default
+
+Not affected by the Global Interpreter Lock (GIL)
+
+Slower to create than threads, but more powerful
+
+Example-1:
+=========
+
+from multiprocessing import Process
+
+def task():
+    print("Process is running")
+
+p = Process(target=task)
+p.start()
+p.join()
+
+
+Example 2: Two Processes
+=========================
+
+from multiprocessing import Process
+
+def task1():
+    print("Task 1 running")
+
+def task2():
+    print("Task 2 running")
+
+p1 = Process(target=task1)
+p2 = Process(target=task2)
+
+p1.start()
+p2.start()
+
+p1.join()
+p2.join()
+
+print("Main program finished")
+
+=================================================================================================
+
+Example 3: Process with Arguments
+
+
+from multiprocessing import Process
+
+def square(n):
+    print("Square:", n * n)
+
+p = Process(target=square, args=(5,))
+p.start()
+p.join()
+
+====================================================================================================
+
+Real-Life Example
+
+Think of a computer lab:
+
+Each process is a separate computer
+
+Each has its own memory and CPU
+
+They work independently
+
+====================================================================================================
+
+Summary (Exam Ready)
+
+A process is an independent unit of execution
+
+Uses multiprocessing module
+
+Has separate memory
+
+Suitable for CPU-intensive tasks
+=====================================================================================================
+Example Showing Process Life Cycle:
+===================================
+
+from multiprocessing import Process
+import time
+
+def task():
+    print("Process started")  # Running
+    time.sleep(2)             # Waiting / Blocked
+    print("Process finished") # Terminated
+
+p = Process(target=task)
+print("Process created")      # New
+p.start()                     # Ready → Running
+p.join()                      # Wait until terminated
+print("Main program ends")
+=======================================================================================================
+
+Thread Life Cycle              Process Life Cycle
+----------------              ----------------
+New (Created)  <----->        New (Created)
+        |                             |
+Runnable / Ready  <----->        Ready / Runnable
+        |                             |
+Running  <--------------------->   Running
+        |                             |
+Waiting / Blocked  <----->        Waiting / Blocked
+        |                             |
+Terminated / Dead  <----->       Terminated / Exit
+
+
+| Feature         | Thread                         | Process                        |
+| --------------- | ------------------------------ | ------------------------------ |
+| Creation        | `threading.Thread()`           | `multiprocessing.Process()`    |
+| Memory          | Shared with parent thread      | Separate memory                |
+| Start           | `start()`                      | `start()`                      |
+| Running         | CPU executes the thread        | CPU executes the process       |
+| Waiting/Blocked | sleep(), I/O, lock             | sleep(), I/O, resource wait    |
+| Termination     | `join()` waits, cannot restart | `join()` waits, cannot restart |
+| Lightweight     | Yes                            | Heavier                        |
+
+========================================================================================================
+
+Key Differences in Life Cycle
+
+Threads share memory → easy communication
+
+Processes have independent memory → safer for CPU-heavy tasks
+
+Both have similar states: New → Ready → Running → Waiting → Terminated
+
+====================================================================================================
+
+
+
+
+
+
+
